@@ -21,11 +21,11 @@ $(document).ready(function () {
 
 
 Init = function(){
-  $("ul").children().removeClass().addClass("card");
-  $("#stars-three").find("i").removeClass();
-  $("#squar").find("i").removeClass();
+  $("ul").children().removeClass().addClass("card");//把所有卡片的类都换成card.
+  $("#stars-three").find("i").removeClass();//初始化星星。
+  $("#squar").find("i").removeClass();//清除所有i元素下的图形。
   for(var i= 0; i < 16; i++){
-    $("#square"+i).addClass(cards[i]);
+    $("#square"+i).addClass(cards[i]);//给每个卡片一个随机的图形。
   };
 
 };//初始化函数
