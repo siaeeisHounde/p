@@ -4,7 +4,7 @@ $(document).ready(function() {
     $("div.restart").click(function() {
         Init(); //初始化
     });
-
+    //点击事件编写
     $("li").click(function(evt) {
 
         if(evt) {
@@ -13,19 +13,22 @@ $(document).ready(function() {
             var thisSquare = window.event.srcElenment;
         }
         if(thisSquare.className == "card") {
-            $(this).addClass("card open show");
-        }
+            $(this).addClass("card open show")
+            .fadeTo(400,0.25).fadeTo(100,1);//产生一个动画效果。
+            //alert($(this).find("i").prop("className"));
+
+
+          }
+
 
     });
 });
 
-
+//初始化函数
 function Init() {
     cleanCards(); //清除原有布局
     newCards(); //布设新的卡片布局
 } //初始化函数
-
-
 var cards = new Array("fa fa-diamond",
     "fa fa-paper-plane-o",
     "fa fa-anchor",
@@ -43,9 +46,6 @@ var cards = new Array("fa fa-diamond",
     "fa fa-bicycle",
     "fa fa-bomb",
 );
-
-
-
 //生成新的卡片布局。
 function newCards() {
 
@@ -68,8 +68,7 @@ function cleanCards() {
         .find("i").removeClass(); //同时清除html文档里的i标签下的图形。
     $("#stars-three").find("i").removeClass(); //初始化星星。
 }
-
-//随机数的产生
+//产生一个0到15之间的随机整数
 function setSquare() {
     return Math.floor(Math.random() * 16);
 }
