@@ -5,12 +5,10 @@ $(document).ready(function() {
         Init(); //初始化
     });
     //点击事件编写
-    $("li").click(function(evt) {
-
-        if(evt) {
-            var thisSquare = evt.target;
-        } else {
-            var thisSquare = window.event.srcElenment;
+    $("li").click(function() {
+        if($(this).attr("class") == "card") {
+            $(this).removeClass().addClass("card match")
+                .fadeTo(400, 0.25).fadeTo(100, 1); //产生一个动画效果。
         }
           //alert($(this).find("i").arrt("id"));
           //CardPic = $(this).find("i").prop("className");
