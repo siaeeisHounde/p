@@ -1,24 +1,36 @@
 $(document).ready(function() {
-
+  var b = 0; //声明一个计数用的变量b。
+  var CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
+  var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
     Init(); //初始化
     $("div.restart").click(function() {
-        Init(); //初始化
+      Init(); //初始化
+      b = 0;
     });
     //点击事件编写
     $("li").click(function() {
         if($(this).attr("class") == "card") {
-            $(this).removeClass().addClass("card match")
+            $(this).removeClass().addClass("card open show")
                 .fadeTo(400, 0.25).fadeTo(100, 1); //产生一个动画效果。
-        }
-          //alert($(this).find("i").arrt("id"));
-          //CardPic = $(this).find("i").prop("className");
-          //alert($(this).find("i").prop("className"));
-          //if(checkCards(CardPic)){
-          //  $(this).removeClass().addClass("card");
-        //  }
 
+        }
+        b++;
+
+        CardPic[b] = $(this).find("i").prop("className"); //通过点击把“i”所含的类赋值给CardPic。
+        CardId[b] = $(this).find("i").prop("id"); //通过点击“i”的Id赋值给Cardid.
+
+
+      if (b%2==0) {
+        if(CardPic[b] !== CardPic[b - 1]) {
+          
+          $("#square"+CardId[b].substring(6)).removeClass().addClass("card");
+          $("#square"+CardId[b-1].substring(6)).removeClass().addClass("card");
+          }
+
+      }
     });
 });
+
 
 //初始化函数
 function Init() {
@@ -71,24 +83,7 @@ function setSquare() {
 
 //检查两张卡片是否相同，如果相同保留，如果不相同再次遮盖起来。
 
-var first = 0;
-var second = 0;
-var i = 0;
-function checkCards(CardPic) {
-if(first === 0 && second === 0 && i === 0) {
-        first = CardPic;
-        i++;
-    } else {
-        second = CardPic;
-        if(first == second) {
-            return true;
-        } else {
-            return false;
-            first = 0;
-            second = 0;
-            i = 0;
+function checkCards() { //接收两个参数，如果两张卡片的类不同，就利用id的值来区分卡片。
 
-        }
-    }
 
 }
