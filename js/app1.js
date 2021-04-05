@@ -1,11 +1,11 @@
 $(document).ready(function() {
-  var b = 0; //声明一个计数用的变量b。
-  var CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
-  var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
+    var b = 0; //声明一个计数用的变量b。
+    var CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
+    var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
     Init(); //初始化
     $("div.restart").click(function() {
-      Init(); //初始化
-      b = 0;
+        Init(); //初始化
+        b = 0;
     });
     //点击事件编写
     $("li").click(function() {
@@ -20,14 +20,16 @@ $(document).ready(function() {
         CardId[b] = $(this).find("i").prop("id"); //通过点击“i”的Id赋值给Cardid.
 
 
-      if (b%2==0) {
-        if(CardPic[b] !== CardPic[b - 1]) {
-          
-          $("#square"+CardId[b].substring(6)).removeClass().addClass("card");
-          $("#square"+CardId[b-1].substring(6)).removeClass().addClass("card");
-          }
+        if(b % 2 == 0) {
+            setTimeout(function() {
+                if(CardPic[b] !== CardPic[b - 1]) {
+                    $("#square" + CardId[b].substring(6)).parent().removeClass().addClass("card");
+                    $("#square" + CardId[b - 1].substring(6)).parent().removeClass().addClass("card");
+                }
 
-      }
+            }, 500);
+
+        }
     });
 });
 
