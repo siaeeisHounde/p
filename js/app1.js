@@ -3,7 +3,7 @@ $(document).ready(function() {
     var CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
     var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
     Init(); //初始化
-    $("div.restart").click(function() {
+    $(".restart").click(function() {
         Init(); //初始化
         b = 0;
     });
@@ -22,20 +22,29 @@ $(document).ready(function() {
 
         if(b % 2 == 0) {
             setTimeout(function() {
-                if(CardPic[b] !== CardPic[b - 1]) {
-                    $("#square" + CardId[b].substring(6)).parent().removeClass().addClass("card");
-                    $("#square" + CardId[b - 1].substring(6)).parent().removeClass().addClass("card");
-                }
+                if(CardPic[b] == CardPic[b - 1] && CardId[b] !== CardId[b - 1]) {
+                    $("#square" + CardId[b].substring(6)).parent().off("click");
+                    $("#square" + CardId[b - 1].substring(6)).parent().off("click");
+                }//只有在不同卡片的图案相同时去除点击事件。
 
-            }, 500);
+                if(CardPic[b] !== CardPic[b - 1] || CardId[b] == CardId[b - 1]) { //当点击两次所获得的i元素的类不同且不是同一张卡片时进行如下操做。
+                    $("#square" + CardId[b].substring(6)) //当满足上面条件时，把卡片遮盖起来。
+                        .parent().removeClass().addClass("card");
+                    $("#square" + CardId[b - 1].substring(6))
+                        .parent().removeClass().addClass("card");
+                } //CardId这条目的是防止操作者在同一张卡片上点击两次，从而扰乱以下逻辑。
+
+            }, 100);
 
         }
+
     });
 });
 
 
 //初始化函数
 function Init() {
+
     cleanCards(); //清除原有布局
     newCards(); //布设新的卡片布局
 } //初始化函数
@@ -81,11 +90,4 @@ function cleanCards() {
 //产生一个0到16之间的随机整数
 function setSquare() {
     return Math.floor(Math.random() * 16);
-}
-
-//检查两张卡片是否相同，如果相同保留，如果不相同再次遮盖起来。
-
-function checkCards() { //接收两个参数，如果两张卡片的类不同，就利用id的值来区分卡片。
-
-
 }
