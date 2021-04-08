@@ -6,6 +6,7 @@ $(document).ready(function() {
     $(".restart").click(function() {
         Init(); //初始化
         b = 0;
+
     });
     //点击事件编写
     $("li").click(function() {
@@ -23,8 +24,8 @@ $(document).ready(function() {
         if(b % 2 == 0) {
             setTimeout(function() {
                 if(CardPic[b] == CardPic[b - 1] && CardId[b] !== CardId[b - 1]) {
-                    $("#square" + CardId[b].substring(6)).parent().off("click");
-                    $("#square" + CardId[b - 1].substring(6)).parent().off("click");
+                    $("#square" + CardId[b].substring(6)).parent().unbind("click");
+                    $("#square" + CardId[b - 1].substring(6)).parent().unbind("click");
                 }//只有在不同卡片的图案相同时去除点击事件。
 
                 if(CardPic[b] !== CardPic[b - 1] || CardId[b] == CardId[b - 1]) { //当点击两次所获得的i元素的类不同且不是同一张卡片时进行如下操做。
@@ -44,7 +45,6 @@ $(document).ready(function() {
 
 //初始化函数
 function Init() {
-
     cleanCards(); //清除原有布局
     newCards(); //布设新的卡片布局
 } //初始化函数
