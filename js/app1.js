@@ -4,12 +4,11 @@ $(document).ready(function() {
     var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
     Init(); //初始化
     $(".restart").click(function() {
-        Init(); //初始化
-        b = 0;
+       location.reload();
 
     });
     //点击事件编写
-    $("li").click(function() {
+    $("li").bind("click",function() {
         if($(this).attr("class") == "card") {
             $(this).removeClass().addClass("card open show")
                 .fadeTo(400, 0.25).fadeTo(100, 1); //产生一个动画效果。
