@@ -4,11 +4,16 @@ $(document).ready(function() {
     var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
     Init(); //初始化
     $(".restart").click(function() {
-       location.reload();
+        //location.reload();
+        var b = 0; //声明一个计数用的变量b。
+        var CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
+        var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
+        Init(); //初始化
+         $("li").unbind("click").bind("click", deal);
 
     });
     //点击事件编写
-    $("li").bind("click",function() {
+    $("li").bind("click", deal = function() {
         if($(this).attr("class") == "card") {
             $(this).removeClass().addClass("card open show")
                 .fadeTo(400, 0.25).fadeTo(100, 1); //产生一个动画效果。
@@ -25,7 +30,7 @@ $(document).ready(function() {
                 if(CardPic[b] == CardPic[b - 1] && CardId[b] !== CardId[b - 1]) {
                     $("#square" + CardId[b].substring(6)).parent().unbind("click");
                     $("#square" + CardId[b - 1].substring(6)).parent().unbind("click");
-                }//只有在不同卡片的图案相同时去除点击事件。
+                } //只有在不同卡片的图案相同时去除点击事件。
 
                 if(CardPic[b] !== CardPic[b - 1] || CardId[b] == CardId[b - 1]) { //当点击两次所获得的i元素的类不同且不是同一张卡片时进行如下操做。
                     $("#square" + CardId[b].substring(6)) //当满足上面条件时，把卡片遮盖起来。
@@ -34,7 +39,7 @@ $(document).ready(function() {
                         .parent().removeClass().addClass("card");
                 } //CardId这条目的是防止操作者在同一张卡片上点击两次，从而扰乱以下逻辑。
 
-            }, 100);
+            }, 300);
 
         }
 
