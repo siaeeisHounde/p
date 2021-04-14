@@ -6,16 +6,21 @@ $(document).ready(function() {
     Init(); //初始化
     var winNumber = 0; //声明一个变量来对计时器停止进行控制。
     timedCount(); //加载计时器。
+
     $(".restart").click(function() {
         //location.reload();//先前用的解决方案。
-        var winNumber = 0; //声明一个变量来对计时器停止进行控制。
-        var b = 0; //声明一个计数用的变量b。
-        var CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
-        var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
+        c = 0; //把计时器的初始变量重新赋值。
+         winNumber = 0; //声明一个变量来对计时器停止进行控制。
+         b = 0; //声明一个计数用的变量b。
+         CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
+         CardId = new Array(); //声明一个数组用来存放卡片的id标签。
         Init(); //初始化
         $("#squar").find("li").unbind("click").bind("click", deal); //初始化点击事件。
         timedCount(); //加载计时器。
-        c = 0; //把计时器的初始变量重新赋值。
+        $("#star1").show();
+        $("#star2").show();
+        $("#star3").show();
+
     });
     //点击事件编写
     $("li").bind("click", deal = function() {//把点击函数赋给变量deal.
@@ -37,6 +42,7 @@ $(document).ready(function() {
                     console.log(winNumber);
                     if(winNumber == 8) {//停止计时函数
                         clearTimeout(t);
+                        winTest();
                     }
                 } //只有在不同卡片的图案相同时去除点击事件。
 
@@ -50,11 +56,20 @@ $(document).ready(function() {
             }, 300);//延时0.3秒。
 
         }
-
+        if (b == 10) {
+          $("#star1").hide();
+         }
+         if (b == 15 ) {
+           $("#star2").hide();
+         }
+         if (b > 20) {
+           $("#star3").hide();
+         }
+         console.log(b);
     });
+    //HideStart();
 
 });
-
 
 //初始化函数
 function Init() {
@@ -99,7 +114,7 @@ function cleanCards() {
     $("#squar")
         .find("li").removeClass().addClass("card") //把所有卡片的类都换成card. 找到标签li,同时清除类。
         .find("i").removeClass(); //同时清除html文档里的i标签下的图形。
-    $("#stars-three").find("i").removeClass(); //初始化星星。
+    //$("#stars-three").find("i").removeClass(); //初始化星星。
 }
 //产生一个0到16之间的随机整数
 function setSquare() {
@@ -109,9 +124,26 @@ function setSquare() {
 //计时器函数。
 var c = 0;
 var t;
-
 function timedCount() {
     c = c + 1;
     document.getElementById('timer').innerHTML = c;
     t = setTimeout("timedCount()", 1000);//每隔1秒调用一次函数。
 }
+//根据点击步骤来隐藏星星
+/*function HideStart() {
+  if (b == 20) {
+    $("#star1").hide();
+   }
+   if (b == 30 ) {
+     $("#star2").hide();
+   }
+   if (b > 50) {
+     $("#star3").hide();
+   }
+ }*/
+ function winTest()
+ {
+   var myWindow=window.open("win.html",'newwindow',
+   "width=400, height=300,top =100,left=500,scrollbars=no,");
+
+  }
