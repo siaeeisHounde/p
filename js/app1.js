@@ -6,15 +6,17 @@ $(document).ready(function() {
     Init(); //初始化
     var winNumber = 0; //声明一个变量来对计时器停止进行控制。
     timedCount(); //加载计时器。
+    numberOfsteps(b); //加载计步器。
 
     $(".restart").click(function() {
         //location.reload();//先前用的解决方案。
         c = 0; //把计时器的初始变量重新赋值。
-         winNumber = 0; //声明一个变量来对计时器停止进行控制。
-         b = 0; //声明一个计数用的变量b。
-         CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
-         CardId = new Array(); //声明一个数组用来存放卡片的id标签。
+        winNumber = 0; //声明一个变量来对计时器停止进行控制。
+        b = 0; //声明一个计数用的变量b。
+        CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
+        CardId = new Array(); //声明一个数组用来存放卡片的id标签。
         Init(); //初始化
+        numberOfsteps(b); //加载计步器。
         $("#squar").find("li").unbind("click").bind("click", deal); //初始化点击事件。
         timedCount(); //加载计时器。
         $("#star1").show();
@@ -23,7 +25,7 @@ $(document).ready(function() {
 
     });
     //点击事件编写
-    $("li").bind("click", deal = function() {//把点击函数赋给变量deal.
+    $("li").bind("click", deal = function() { //把点击函数赋给变量deal.
         if($(this).prop("className") == "card") {
             $(this).removeClass().addClass("card open show")
                 .fadeTo(400, 0.25).fadeTo(100, 1); //产生一个动画效果。
@@ -32,15 +34,15 @@ $(document).ready(function() {
 
         CardPic[b] = $(this).find("i").prop("className"); //通过点击把“i”所含的类赋值给CardPic。
         CardId[b] = $(this).find("i").prop("id"); //通过点击“i”的Id赋值给Cardid.
-
         if(b % 2 == 0) {
+
             setTimeout(function() {
                 if(CardPic[b] == CardPic[b - 1] && CardId[b] !== CardId[b - 1]) {
                     $("#square" + CardId[b].substring(6)).parent().unbind("click");
                     $("#square" + CardId[b - 1].substring(6)).parent().unbind("click");
-                    winNumber = winNumber + 1;//每次有相同的卡片时变量增加1.
+                    winNumber = winNumber + 1; //每次有相同的卡片时变量增加1.
                     console.log(winNumber);
-                    if(winNumber == 8) {//停止计时函数
+                    if(winNumber == 1) { //停止计时函数
                         clearTimeout(t);
                         winTest();
                     }
@@ -53,21 +55,13 @@ $(document).ready(function() {
                         .parent().removeClass().addClass("card");
                 } //CardId这条目的是防止操作者在同一张卡片上点击两次，从而扰乱以下逻辑。
 
-            }, 300);//延时0.3秒。
+            }, 300); //延时0.3秒。
 
         }
-        if (b == 10) {
-          $("#star1").hide();
-         }
-         if (b == 15 ) {
-           $("#star2").hide();
-         }
-         if (b > 20) {
-           $("#star3").hide();
-         }
-         console.log(b);
+        HideStart(b); //根据相应布属来控制星星数量。
+        numberOfsteps(b); //加载计步器
     });
-    //HideStart();
+
 
 });
 
@@ -121,29 +115,34 @@ function setSquare() {
     return Math.floor(Math.random() * 16);
 }
 
+//计步数
+function numberOfsteps(b) {
+    document.getElementById('steps').innerHTML = b;
+}
 //计时器函数。
 var c = 0;
 var t;
+
 function timedCount() {
     c = c + 1;
     document.getElementById('timer').innerHTML = c;
-    t = setTimeout("timedCount()", 1000);//每隔1秒调用一次函数。
+    t = setTimeout("timedCount()", 1000); //每隔1秒调用一次函数。
 }
 //根据点击步骤来隐藏星星
-/*function HideStart() {
-  if (b == 20) {
-    $("#star1").hide();
-   }
-   if (b == 30 ) {
-     $("#star2").hide();
-   }
-   if (b > 50) {
-     $("#star3").hide();
-   }
- }*/
- function winTest()
- {
-   var myWindow=window.open("win.html",'newwindow',
-   "width=400, height=300,top =100,left=500,scrollbars=no,");
+function HideStart(b) {
+    if(b == 20) {
+        $("#star1").hide();
+    }
+    if(b == 30) {
+        $("#star2").hide();
+    }
+    if(b > 50) {
+        $("#star3").hide();
+    }
+}
 
-  }
+function winTest() {
+    var myWindow = window.open("win.html", 'newwindow',
+        "width=350, height=350,top =100,left=500,scrollbars=no,");
+
+}
