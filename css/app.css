@@ -27,6 +27,29 @@ body {
     align-items: center;
     flex-direction: column;
 }
+/*
+/*style for win card
+*/
+.containerWin {
+  filter:alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+  border-radius: 10px;
+  background-color: #736b6b;
+  margin-left: 500px;
+  position:absolute;
+  left:0px;
+  top:300px;
+   z-index:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.winDisply{
+  display: none;
+}
 
 h1 {
     font-family: 'Open Sans', sans-serif;

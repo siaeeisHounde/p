@@ -8,7 +8,7 @@ $(document).ready(function() {
     timedCount(); //加载计时器。
     numberOfsteps(b); //加载计步器。
 
-    $(".restart").click(function() {
+    $(".restart").bind("click", RE = function() {
         //location.reload();//先前用的解决方案。
         c = 0; //把计时器的初始变量重新赋值。
         winNumber = 0; //声明一个变量来对计时器停止进行控制。
@@ -19,10 +19,6 @@ $(document).ready(function() {
         numberOfsteps(b); //加载计步器。
         $("#squar").find("li").unbind("click").bind("click", deal); //初始化点击事件。
         timedCount(); //加载计时器。
-        $("#star1").show();
-        $("#star2").show();
-        $("#star3").show();
-
     });
     //点击事件编写
     $("li").bind("click", deal = function() { //把点击函数赋给变量deal.
@@ -41,10 +37,14 @@ $(document).ready(function() {
                     $("#square" + CardId[b].substring(6)).parent().unbind("click");
                     $("#square" + CardId[b - 1].substring(6)).parent().unbind("click");
                     winNumber = winNumber + 1; //每次有相同的卡片时变量增加1.
-                    console.log(winNumber);
+
                     if(winNumber == 1) { //停止计时函数
                         clearTimeout(t);
-                        winTest();
+                        //winTest();
+                        winTestone();
+                        document.getElementById("Endtimes").innerHTML = b;
+                        document.getElementById("Endsteps").innerHTML = c;
+
                     }
                 } //只有在不同卡片的图案相同时去除点击事件。
 
@@ -58,6 +58,8 @@ $(document).ready(function() {
             }, 300); //延时0.3秒。
 
         }
+
+        $(".restartWin").bind("click", RE); //为弹出界面写的脚本.
         HideStart(b); //根据相应布属来控制星星数量。
         numberOfsteps(b); //加载计步器
     });
@@ -67,7 +69,13 @@ $(document).ready(function() {
 
 //初始化函数
 function Init() {
-
+    $("#star1").show();
+    $("#star2").show();
+    $("#star3").show();
+    $("#star11").show();
+    $("#star22").show();
+    $("#star33").show();
+    $("#Winwindow").addClass("winDisply");
     cleanCards(); //清除原有布局
     newCards(); //布设新的卡片布局
 } //初始化函数
@@ -132,17 +140,24 @@ function timedCount() {
 function HideStart(b) {
     if(b == 20) {
         $("#star1").hide();
+        $("#star11").hide();
     }
     if(b == 30) {
         $("#star2").hide();
+        $("#star22").hide();
     }
     if(b > 50) {
         $("#star3").hide();
+        $("#star33").hide();
     }
 }
 
-function winTest() {
+
+/*function winTest() {
     var myWindow = window.open("win.html", 'newwindow',
         "width=350, height=350,top =100,left=500,scrollbars=no,");
 
+}*/
+function winTestone() {
+    $("#Winwindow").removeClass("winDisply");
 }

@@ -4,8 +4,11 @@
 <head>
 
     <script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/app1.js"></script>
     <script type="text/javascript">
-        alert($("#timer", window.opener.document));
+    var e=$('#timer',mywindow.opener.document).val();
+//var E = window.opener.document.getElementById('timer').value;
+       alert(e);
     </script>
     <meta charset="utf-8">
     <title>Matching Game</title>
@@ -49,10 +52,10 @@
             <div>
                 <p>
                     You have used steps is
-                    <i id="steps">0</i>
+                    <i id="Endsteps">0</i>
                 </p>
                 <p>Used time is
-                    <i id="timer">0<i>
+                    <i id="Endtime">0<i>
              </p>
          </div>
         </section>
