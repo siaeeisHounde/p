@@ -43,7 +43,7 @@ $(document).ready(function() {
                     $("#square" + CardId[b - 1].substring(6)).parent().unbind("click");
                     winNumber = winNumber + 1; //每次有相同的卡片时变量增加1.
 
-                    if(winNumber == 1) { //停止计时函数
+                    if(winNumber == 8) { //停止计时函数
                         myStopFunction();
                         //winTest();
                         winTestone();
