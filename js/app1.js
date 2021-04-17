@@ -1,24 +1,26 @@
 $(document).ready(function() {
+    var a= 0;
     c = 0; //把计时器的初始变量重新赋值。
     var b = 0; //声明一个计数用的变量b。
     var CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
     var CardId = new Array(); //声明一个数组用来存放卡片的id标签。
     Init(); //初始化
     var winNumber = 0; //声明一个变量来对计时器停止进行控制。
-    timedCount(); //加载计时器。
-    numberOfsteps(b); //加载计步器。
+    //timedCount(); //加载计时器。
+    numberOfsteps(a); //加载计步器。
 
     $(".restart").bind("click", RE = function() {
         //location.reload();//先前用的解决方案。
+        var a= 0;
         c = 0; //把计时器的初始变量重新赋值。
         winNumber = 0; //声明一个变量来对计时器停止进行控制。
         b = 0; //声明一个计数用的变量b。
         CardPic = new Array(); //声明一个数组用来存放卡片i元素的类。
         CardId = new Array(); //声明一个数组用来存放卡片的id标签。
         Init(); //初始化
-        numberOfsteps(b); //加载计步器。
+        numberOfsteps(a); //加载计步器。
         $("#squar").find("li").unbind("click").bind("click", deal); //初始化点击事件。
-        timedCount(); //加载计时器。
+        //timedCount(); //加载计时器。
     });
     //点击事件编写
     $("li").bind("click", deal = function() { //把点击函数赋给变量deal.
@@ -30,6 +32,9 @@ $(document).ready(function() {
 
         CardPic[b] = $(this).find("i").prop("className"); //通过点击把“i”所含的类赋值给CardPic。
         CardId[b] = $(this).find("i").prop("id"); //通过点击“i”的Id赋值给Cardid.
+        if (CardId[b] !== CardId[b - 1]&&b % 2 == 0) {
+          a=a+1;
+        }
         if(b % 2 == 0) {
 
             setTimeout(function() {
@@ -42,8 +47,8 @@ $(document).ready(function() {
                         clearTimeout(t);
                         //winTest();
                         winTestone();
-                        document.getElementById("Endtimes").innerHTML = b;
-                        document.getElementById("Endsteps").innerHTML = c;
+                        document.getElementById("Endtimes").innerHTML = c;
+                        document.getElementById("Endsteps").innerHTML = a;
 
                     }
                 } //只有在不同卡片的图案相同时去除点击事件。
@@ -61,7 +66,8 @@ $(document).ready(function() {
 
         $(".restartWin").bind("click", RE); //为弹出界面写的脚本.
         HideStart(b); //根据相应布属来控制星星数量。
-        numberOfsteps(b); //加载计步器
+        numberOfsteps(a); //加载计步器
+        timedCount();
     });
 
 
@@ -124,8 +130,9 @@ function setSquare() {
 }
 
 //计步数
-function numberOfsteps(b) {
-    document.getElementById('steps').innerHTML = b;
+
+function numberOfsteps(a) {
+    document.getElementById('steps').innerHTML = a;
 }
 //计时器函数。
 var c = 0;
@@ -137,16 +144,16 @@ function timedCount() {
     t = setTimeout("timedCount()", 1000); //每隔1秒调用一次函数。
 }
 //根据点击步骤来隐藏星星
-function HideStart(b) {
-    if(b == 20) {
+function HideStart(a) {
+    if(a == 20) {
         $("#star1").hide();
         $("#star11").hide();
     }
-    if(b == 30) {
+    if(a == 30) {
         $("#star2").hide();
         $("#star22").hide();
     }
-    if(b > 50) {
+    if(a > 50) {
         $("#star3").hide();
         $("#star33").hide();
     }
@@ -156,7 +163,6 @@ function HideStart(b) {
 /*function winTest() {
     var myWindow = window.open("win.html", 'newwindow',
         "width=350, height=350,top =100,left=500,scrollbars=no,");
-
 }*/
 function winTestone() {
     $("#Winwindow").removeClass("winDisply");
